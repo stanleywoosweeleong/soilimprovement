@@ -33,6 +33,7 @@ To publish with GitHub Pages: **Settings → Pages → Deploy from a branch → 
 ```
 index.html            The app (standalone; translations embedded)
 tools/make_index.py   Wraps the editing copy into a standalone index.html
+tools/script_maps.py  Embeds Simplified/Traditional conversion maps
 i18n/                 Translation sources and tooling
   RULES.md            Translation rules and terminology table
   src.json, chunk*.json            English source strings, by batch
@@ -46,6 +47,8 @@ i18n/                 Translation sources and tooling
 The page keeps its English text as written. A small runtime layer finds each piece of visible text, replaces numbers with placeholders (`{0}`, `{1}`…), and looks up the translation, so dynamic text such as the soil checker's prescriptions is translated too. Traditional Chinese is converted from Simplified Chinese with Taiwan-standard characters.
 
 When English text changes, re-run `extract.js` / `extract2.js` to find new strings, translate them into a new `chunkN.json` batch following `i18n/RULES.md`, then run `build.py`. New strings not yet translated show in English.
+
+Each Chinese mode shows one script only: Simplified mode converts any Traditional characters (for example original paper titles) to Simplified, and Traditional mode does the reverse. After `build.py`, run `python3 tools/script_maps.py index.html` to refresh the conversion maps. English and Malay hide Chinese labels everywhere except the Works library and Sources tabs, which keep the original titles.
 
 ## Notes and limits
 
