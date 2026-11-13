@@ -2,13 +2,13 @@
 
 **土壤修复 (Soil Recovery)**, formerly "Huang Soil Atlas", is a single-page reference app on the soil research and field methods of **Dr. Huang Jui-chang (黄瑞彰)**, the "Soil Nutritionist" at Taiwan's Tainan District Agricultural Research and Extension Station (Tainan DARES). It was compiled for Malaysian growers attending his course in Shah Alam on 9 December 2026.
 
-The app is available in **English, 简体中文, 繁體中文 and Bahasa Melayu**. Choose a language from the header; the choice is remembered on that device.
+The app is available in **English, 简体中文, 繁體中文 and Bahasa Melayu**. Pick one on first launch; change it later with the globe button in the header. The choice is remembered on that device.
 
 ## What's inside
 
 | Tab | Contents |
 |---|---|
-| Overview | Profile and career timeline, 1998–2026 |
+| Overview | Profile, career timeline (1998–2026) and credits for Dr. Huang, co-authors, writers and organizations |
 | Core principles | 13 principles from his papers and interviews (fertilize by the soil, disease triangle, microbes as the "second seed", pH as the fastest lever, and more) |
 | Field evidence | Trial charts: melon, bitter gourd, nematodes, root rot, salt remediation, rice rotation; an organic farm case study |
 | Soil test checker | Enter a lab report (EC, pH, OM, P, K, Ca, Mg) and get a prioritized prescription, including his EC-based base-fertilizer rule |
@@ -91,6 +91,7 @@ labels everywhere except the Works library and Sources tabs, which keep the orig
 
 ## Notes and limits
 
+- All research, methods and recipes are the work of Dr. Huang Jui-chang and colleagues; see **Credits** at the end of the Overview tab.
 - Content is drawn from Dr. Huang's published papers, Tainan DARES handbooks and newsletters, and interviews in Harvest Farm Magazine (豐年) and NewsMarket. Points that are the compiler's interpretation are marked in the app.
 - The "Get microbes" tab is independent sourcing research for Malaysia; product availability was not confirmed with suppliers.
 - Translations were produced with AI assistance and checked automatically for completeness; a native-speaker review is recommended, especially for Malay.

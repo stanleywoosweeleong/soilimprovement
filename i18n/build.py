@@ -71,6 +71,7 @@ NAMES = [  # (romanised forms, longest first), Simplified, Traditional
     (["Cheng An-hsiu"], "郑安秀", "鄭安秀"),
     (["Sun Wen-chang"], "孙文章", "孫文章"),
     (["Tseng Yi-ling"], "曾怡陵", "曾怡陵"),
+    (["Chien Hsuan-yu"], "简宣裕", "簡宣裕"),
 ]
 NAME_RES = [(re.compile(r"(?<![A-Za-z])" + re.escape(f) + r"(?![A-Za-z])"), hans, hant)
             for forms, hans, hant in NAMES for f in forms]
