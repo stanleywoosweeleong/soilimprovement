@@ -208,9 +208,15 @@ details.more>.body{display:grid;gap:10px}
 .xall{justify-self:start;font:inherit;font-size:.8rem;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;margin-top:10px}
 .xall:hover{color:var(--ink);border-color:var(--muted)}
 #totop{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:20;font:inherit;font-size:.8rem;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-body:not([data-view="overview"]) .idrow .sub,body:not([data-view="overview"]) .meter{display:none}
-body:not([data-view="overview"]) .idrow h1{font-size:clamp(1.5rem,3vw,2.1rem)}
-body:not([data-view="overview"]) .top .wrap{padding-block:16px 0;gap:12px}
+.idrow h1{font-size:clamp(1.5rem,3vw,2.1rem)}
+.top .wrap{padding-block:16px 4px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;column-gap:16px}
+.top .langs{grid-column:2;grid-row:1;align-self:center}
+.top .idrow{display:contents}
+.top .idrow>div:first-child{grid-column:1;grid-row:1;min-width:0}
+.intro{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px 28px;align-items:center}
+@media (max-width:760px){.intro{grid-template-columns:1fr}}
+.intro .big{gap:14px 22px}
+.intro .big b{font-size:1.7rem}
 .sy{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px}
 .sym{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:8px;align-content:start;min-width:0}
 .sym .hd{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
@@ -307,12 +313,6 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
       <div>
         <div class="eyebrow" style="color:var(--humus-muted)">Field reference · The "Soil Nutritionist" <span class="zh">土壤营养师</span></div>
         <h1>Dr. Huang Jui-chang <span class="zh">黄瑞彰</span></h1>
-        <p class="sub">Dr. Huang's research, theories and field methods for repairing tired farm soil. Compiled from published papers, extension articles and interviews from Taiwan's Tainan District Agricultural Research and Extension Station.</p>
-      </div>
-      <div class="meter" aria-label="Key figures">
-        <div><b>25 yrs</b><span>field practice</span></div>
-        <div><b>80,000+</b><span>soil samples tested</span></div>
-        <div><b>−⅓</b><span>chemical fertilizer, same or higher yield</span></div>
       </div>
     </div>
   </div>
@@ -340,6 +340,14 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
 
 <!-- OVERVIEW -->
 <section class="view" id="v-overview">
+  <div class="intro">
+    <p class="lede" style="margin:0">Dr. Huang's research, theories and field methods for repairing tired farm soil. Compiled from published papers, extension articles and interviews from Taiwan's Tainan District Agricultural Research and Extension Station.</p>
+    <div class="big" aria-label="Key figures">
+      <div><b>25 yrs</b><span>field practice</span></div>
+      <div><b>80,000+</b><span>soil samples tested</span></div>
+      <div><b>−⅓</b><span>chemical fertilizer, same or higher yield</span></div>
+    </div>
+  </div>
   <div class="bio">
     <div class="card">
       <div class="eyebrow">About Dr. Huang</div>
