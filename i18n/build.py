@@ -1,10 +1,10 @@
 import json,re,sys
 from collections import Counter
 from opencc import OpenCC
-src=json.load(open('src.json'));src.update(json.load(open('chunk3.json')));src.update(json.load(open('chunk4.json')));src.update(json.load(open('chunk5.json')))
+src=json.load(open('src.json'));src.update(json.load(open('chunk3.json')));src.update(json.load(open('chunk4.json')));src.update(json.load(open('chunk5.json')));src.update(json.load(open('chunk6.json')))
 def load(lang):
     d={}
-    for n in (1,2,3,4,5):
+    for n in (1,2,3,4,5,6):
         import os
         if not os.path.exists(f'{lang}.chunk{n}.json'): continue
         d.update(json.load(open(f'{lang}.chunk{n}.json',encoding='utf-8')))

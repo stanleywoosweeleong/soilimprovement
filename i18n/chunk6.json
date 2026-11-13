@@ -1,0 +1,14 @@
+{
+ "k20000": "<b>Get a soil test.</b> Send a soil sample to a lab (MARDI, your state Jabatan Pertanian office or a private lab). Or use the quick EC test in the grey box below.",
+ "k20001": "<b>Read the bars and the prescription.</b> Each bar compares your value with Dr. Huang's target. The list underneath says what to fix, most urgent first.",
+ "k20002": "<b>Type the numbers from the report</b> into the “Your soil report” boxes. Leave a box empty if your report doesn't have that value.",
+ "k20003": "<span class=\"kband\"></span>Target range",
+ "k20004": "<span class=\"kdot\" style=\"background:var(--bad)\"></span>Far off, fix first",
+ "k20005": "<span class=\"kdot\" style=\"background:var(--good)\"></span>In range",
+ "k20006": "<span class=\"kdot\" style=\"background:var(--warn)\"></span>Somewhat off",
+ "k20007": "Collapse all",
+ "k20008": "Hide table",
+ "k20009": "How to use this",
+ "k20010": "Lab methods matter",
+ "k20011": "The targets assume these lab methods: EC with {0} part soil to {1} parts water, pH with {2} part soil to {3} part water, and phosphorus by the Bray-{4} method. If your lab used a different method, the numbers won't line up exactly, so ask the lab which method they used. This tool is a guide, not a replacement for the lab's own recommendation."
+}

@@ -1,0 +1,14 @@
+{
+ "k20000": "<b>Buat ujian tanah.</b> Hantar sampel tanah ke makmal (MARDI, pejabat Jabatan Pertanian negeri anda atau makmal swasta). Atau gunakan ujian EC pantas dalam kotak kelabu di bawah.",
+ "k20001": "<b>Baca bar dan preskripsi.</b> Setiap bar membandingkan nilai anda dengan sasaran Dr. Huang. Senarai di bawahnya menyatakan apa yang perlu dibetulkan, yang paling mendesak dahulu.",
+ "k20002": "<b>Taip nombor daripada laporan</b> ke dalam kotak “Laporan tanah anda”. Biarkan kotak kosong jika laporan anda tiada nilai itu.",
+ "k20003": "<span class=\"kband\"></span>Julat sasaran",
+ "k20004": "<span class=\"kdot\" style=\"background:var(--bad)\"></span>Jauh tersasar, betulkan dahulu",
+ "k20005": "<span class=\"kdot\" style=\"background:var(--good)\"></span>Dalam julat",
+ "k20006": "<span class=\"kdot\" style=\"background:var(--warn)\"></span>Agak tersasar",
+ "k20007": "Kuncupkan semua",
+ "k20008": "Sembunyikan jadual",
+ "k20009": "Cara menggunakan",
+ "k20010": "Kaedah makmal penting",
+ "k20011": "Sasaran ini berdasarkan kaedah makmal berikut: EC dengan {0} bahagian tanah kepada {1} bahagian air, pH dengan {2} bahagian tanah kepada {3} bahagian air, dan fosforus dengan kaedah Bray-{4}. Jika makmal anda menggunakan kaedah lain, nombornya tidak akan sepadan sepenuhnya, jadi tanya makmal kaedah yang digunakan. Alat ini hanya panduan, bukan pengganti cadangan makmal."
+}
