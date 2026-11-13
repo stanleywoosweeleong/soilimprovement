@@ -233,7 +233,9 @@ details.more>.body{display:grid;gap:10px}
 .tabbar{background:var(--humus)}
 .tabbar .wrap{padding-block:6px 0}
 .lshort{display:none}
-html[lang^="zh"] .sym .hd>.zh,html[lang^="zh"] .principle .zhname{display:none}
+html[lang^="zh"] .sym .hd>.zh,.principle .zhname{display:none}
+html:not([lang^="zh"]) .zh{display:none}
+html:not([lang^="zh"]) #v-sources .zh,html:not([lang^="zh"]) #v-library .zh{display:inline}
 @media (max-width:700px){
   body{font-size:16px}
   .top .wrap{padding-block:12px 10px!important;gap:8px!important}
@@ -1370,6 +1372,10 @@ function hasLetters(s){return /[A-Za-zÀ-ɏ]/.test(String(s).replace(/<[^>]+>/g,
 function i18nKey(html){const nums=[];let i=0;const key=String(html).replace(/\s+/g,' ').trim().split(/(<[^>]+>)/).map(pt=>pt.startsWith('<')?pt:pt.replace(NUM,m=>{nums.push(m);return '{'+(i++)+'}'})).join('');return {key,nums}}
 function fillNums(t,nums){return t.replace(/\{(\d+)\}/g,(m,k)=>nums[+k]!==undefined?nums[+k]:m)}
 function dedupeZh(h){return h.replace(/\s*·\s*<span class="zh">([^<]*)<\/span>/g,(m,z)=>h.replace(m,'').includes(z)?'':m)}
+const HAN='\\u3400-\\u9fff\\uf900-\\ufaff';
+const RE_SPAN_SEP=/\s*·\s*<span class="zh"[^>]*>[^<]*<\/span>/g, RE_SPAN_PAR=/\s*[（(]\s*<span class="zh"[^>]*>[^<]*<\/span>\s*[）)]/g, RE_SPAN=/\s*<span class="zh"[^>]*>[^<]*<\/span>/g;
+const RE_HAN_PAR=new RegExp('\\s*[（(]\\s*['+HAN+'、，\\s]+\\s*[）)]','g'), RE_HAN_SEP=new RegExp('\\s*·\\s*['+HAN+'、，]+(?=\\s*(<|$|·))','g'), RE_HAN_COMMA=new RegExp('[,，]\\s*['+HAN+']+(?=\\s*[）)])','g');
+function stripHan(h){return h.replace(RE_SPAN_SEP,'').replace(RE_SPAN_PAR,'').replace(RE_SPAN,'').replace(RE_HAN_COMMA,'').replace(RE_HAN_PAR,'').replace(RE_HAN_SEP,'')}
 function stripZh(h){return h.replace(/\s*[（(]\s*<span class="zh">[^<]*<\/span>\s*[）)]/g,'').replace(/\s*<span class="zh">[^<]*<\/span>/g,'')}
 function tr(s){if(!LANG||LANG==='en'||!s)return s;const {key,nums}=i18nKey(s);const t=I18N_DICT[LANG]&&I18N_DICT[LANG][key];return t?fillNums(t,nums):s}
 function splitCase(el){const kids=el.children.length;if(kids<2)return false;for(const n of el.childNodes)if(n.nodeType===3&&n.nodeValue.trim())return false;return true}
@@ -1392,12 +1398,13 @@ function translateAll(){
   for(const u of units){const cur=getv(u);let rec=ORIG.get(u.n);if(!rec||cur!==rec.out){rec={src:cur,out:cur};ORIG.set(u.n,rec)}
     let res=rec.src;
     if(LANG!=='en'){const src=rec.src;const lead=u.t==='text'?src.match(/^\s*/)[0]:'',trail=u.t==='text'?src.match(/\s*$/)[0]:'';const t=tr(src.trim());if(t!==src.trim())res=lead+t+trail;if(LANG.startsWith('zh')&&u.t==='html'&&!u.n.closest('.formula'))res=u.n.closest('.term')?dedupeZh(res):stripZh(res)}
+    if(!LANG.startsWith('zh')&&u.t!=='svg'){const host=u.t==='text'?u.n.parentElement:u.n;if(host&&!host.closest('#v-sources,#v-library'))res=stripHan(res)}
     if(res!==cur)setv(u,res);rec.out=getv(u)}
   document.querySelectorAll(ATTRS.map(a=>'['+a+']').join(',')).forEach(el=>{if(el.closest('[data-noi18n]'))return;let m=AORIG.get(el);if(!m){m={};AORIG.set(el,m)}
     ATTRS.forEach(a=>{if(!el.hasAttribute(a))return;const cur=el.getAttribute(a);let r=m[a];if(!r||cur!==r.out){r={src:cur,out:cur};m[a]=r}const res=LANG==='en'?r.src:tr(r.src);if(res!==cur)el.setAttribute(a,res);r.out=res})});
   i18nMO.takeRecords();
 }
-const i18nMO=new MutationObserver(()=>{if(LANG!=='en')translateAll()});
+const i18nMO=new MutationObserver(()=>translateAll());
 function setLang(l){if(!['en','zh-Hans','zh-Hant','ms'].includes(l))l='en';LANG=l;document.documentElement.lang=l;try{localStorage.setItem('soilAtlasLang',l)}catch(e){}
   document.querySelectorAll('#langs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));document.querySelectorAll('[data-hant]').forEach(el=>{if(!el.dataset.hans)el.dataset.hans=el.textContent;el.textContent=l==='zh-Hant'?el.dataset.hant:el.dataset.hans});translateAll()}
 function initI18n(){document.getElementById('langs').addEventListener('click',e=>{const b=e.target.closest('button[data-lang]');if(b)setLang(b.dataset.lang)});
