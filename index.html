@@ -65,7 +65,7 @@ header.top{background:var(--humus);color:var(--humus-ink)}
 .meter div{display:grid}
 .meter b{font-family:var(--f-mono);font-size:1.35rem;color:var(--humus-ink);font-weight:600}
 .meter span{font-size:.75rem;color:var(--humus-muted)}
-nav.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;padding-bottom:16px}
+nav.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:0;padding-bottom:16px}
 nav.tabs a{flex:none;color:var(--humus-muted);text-decoration:none;padding:7px 14px;font-weight:600;font-size:.93rem;border-radius:999px;border:1px solid var(--humus-muted);border-color:rgba(175,192,176,.35)}
 nav.tabs a:hover{color:var(--humus-ink);border-color:var(--humus-muted)}
 nav.tabs a[aria-current="page"]{background:var(--bg);color:var(--ink);border-color:var(--bg)}
@@ -223,6 +223,58 @@ body:not([data-view="overview"]) .top .wrap{padding-block:16px 0;gap:12px}
 .sym dd ul{margin:0;padding-left:18px;display:grid;gap:3px}
 .sym .tip{font-size:.84rem;background:var(--sunk);border-radius:6px;padding:8px 10px;color:var(--muted)}
 .sym .tip b{color:var(--ink)}
+
+.tabbar{background:var(--humus)}
+.tabbar .wrap{padding-block:6px 0}
+.lshort{display:none}
+@media (max-width:700px){
+  body{font-size:16px}
+  .top .wrap{padding-block:12px 10px!important;gap:8px!important}
+  .top .eyebrow{display:none}
+  .idrow h1{font-size:1.3rem!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .idrow h1 .zh{font-size:.75em}
+  .meter{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:100%}
+  .meter{padding-top:8px;border-top:1px solid rgba(175,192,176,.25)}
+  .meter b{font-size:1rem}
+  .meter span{font-size:.7rem;line-height:1.25}
+  .top .wrap{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:10px}
+  .langs{grid-column:2;grid-row:1;gap:3px;flex-wrap:nowrap}
+  .top .idrow{display:contents}
+  .top .idrow>div:first-child{grid-column:1;grid-row:1;min-width:0}
+  .top .meter{grid-column:1/-1;grid-row:2}
+  .idrow h1 .zh{display:none}
+  .idrow .sub{display:none!important}
+  .langs button{min-width:34px;min-height:34px;padding:4px 7px;font-size:.85rem}
+  .lfull{display:none}.lshort{display:inline}
+  .tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+  nav.tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-block:4px 10px;margin:0 calc(-1 * max(16px,env(safe-area-inset-right,0px))) 0 0;padding-right:24px;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  nav.tabs::-webkit-scrollbar{display:none}
+  nav.tabs a{scroll-snap-align:start;min-height:40px;display:inline-flex;align-items:center;font-size:.95rem}
+  main{padding-block:22px 80px}
+  section.view{gap:20px}
+  .card{padding:16px}
+  h2{font-size:1.45rem}
+  .lede{font-size:1rem}
+  details.more>summary{min-height:40px;font-size:.92rem}
+  .xall,.tbl-toggle{min-height:38px;font-size:.88rem;padding:6px 14px}
+  .filters button{min-height:38px;font-size:.88rem}
+  button.btn{min-height:42px}
+  input,select,textarea{font-size:16px!important}
+  .field input{min-height:42px}
+  .big b{font-size:1.6rem}
+  .big{gap:18px 24px}
+  .row{grid-template-columns:minmax(84px,34%) 1fr}
+  .bar{height:22px}
+  .timeline li{grid-template-columns:52px 1fr;gap:10px}
+  .work{grid-template-columns:1fr;gap:6px;padding:14px}
+  .work .yr{font-size:.9rem}
+  .steps>li{grid-template-columns:36px minmax(0,1fr);gap:12px;padding:14px}
+  .steps>li::before{width:34px;height:34px;font-size:1.2rem}
+  .sym{padding:14px}
+  .gauge{padding:10px}
+  #totop{bottom:calc(env(safe-area-inset-bottom,0px) + 16px);min-height:42px}
+  #tip{font-size:.85rem}
+}
 .gl-tools{display:grid;gap:6px;max-width:420px}
 .gl-tools input{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:100%}
 .gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:12px}
@@ -246,10 +298,10 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
 <header class="top">
   <div class="wrap">
     <div class="langs" id="langs" role="group" aria-label="Language" data-noi18n>
-      <button type="button" data-lang="en" lang="en">English</button>
-      <button type="button" data-lang="zh-Hans" lang="zh-Hans">简体中文</button>
-      <button type="button" data-lang="zh-Hant" lang="zh-Hant">繁體中文</button>
-      <button type="button" data-lang="ms" lang="ms">Bahasa Melayu</button>
+      <button type="button" data-lang="en" lang="en" aria-label="English"><span class="lfull">English</span><span class="lshort">EN</span></button>
+      <button type="button" data-lang="zh-Hans" lang="zh-Hans" aria-label="简体中文"><span class="lfull">简体中文</span><span class="lshort">简</span></button>
+      <button type="button" data-lang="zh-Hant" lang="zh-Hant" aria-label="繁體中文"><span class="lfull">繁體中文</span><span class="lshort">繁</span></button>
+      <button type="button" data-lang="ms" lang="ms" aria-label="Bahasa Melayu"><span class="lfull">Bahasa Melayu</span><span class="lshort">BM</span></button>
     </div>
     <div class="idrow">
       <div>
@@ -263,6 +315,10 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
         <div><b>−⅓</b><span>chemical fertilizer, same or higher yield</span></div>
       </div>
     </div>
+  </div>
+</header>
+<div class="tabbar" id="tabbar">
+  <div class="wrap">
     <nav class="tabs" aria-label="Sections">
       <a href="#overview">Overview</a>
       <a href="#principles">Core principles</a>
@@ -278,7 +334,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
     </nav>
   </div>
   <div class="horizon" aria-hidden="true"><i></i><i></i><i></i></div>
-</header>
+</div>
 
 <main class="wrap">
 
@@ -1042,6 +1098,8 @@ document.querySelector('#budai tbody').innerHTML=B.map(r=>`<tr><td>${r[0]}</td>$
 
 /* Tooltip */
 const tip=document.getElementById('tip');
+let tipTimer=null;document.addEventListener('click',e=>{const t=e.target.closest('[data-tip]');if(!t){tip.classList.remove('on');return}tip.textContent=t.dataset.tip;tip.classList.add('on');const r=t.getBoundingClientRect();const x=Math.max(8,Math.min(r.left,innerWidth-tip.offsetWidth-8));tip.style.left=x+'px';tip.style.top=(r.bottom+6)+'px';clearTimeout(tipTimer);tipTimer=setTimeout(()=>tip.classList.remove('on'),3000)});
+addEventListener('scroll',()=>{if(matchMedia('(hover:none)').matches)tip.classList.remove('on')},{passive:true});
 document.addEventListener('mousemove',e=>{const t=e.target.closest('[data-tip]');if(!t){tip.classList.remove('on');return}tip.textContent=t.dataset.tip;tip.classList.add('on');const x=Math.min(e.clientX+14,innerWidth-tip.offsetWidth-8);tip.style.left=x+'px';tip.style.top=(e.clientY+16)+'px'});
 
 /* ---------- SOIL CHECK ---------- */
@@ -1340,7 +1398,7 @@ window.__i18nKeys=function(){const keys=new Set();for(const u of i18nUnits()){co
 
 /* ---------- ROUTING ---------- */
 const VIEWS=["overview","principles","evidence","soil-check","symptoms","playbook","liquid-fertilizer","library","glossary","sources","microbes"];
-function route(){const h=location.hash.slice(1);const v=VIEWS.includes(h)?h:"overview";document.body.dataset.view=v;VIEWS.forEach(x=>{document.getElementById('v-'+x).hidden=x!==v});document.querySelectorAll('nav.tabs a').forEach(a=>{a.toggleAttribute('aria-current',a.getAttribute('href')==='#'+v);if(a.getAttribute('href')==='#'+v)a.setAttribute('aria-current','page')});}
+function route(){const h=location.hash.slice(1);const v=VIEWS.includes(h)?h:"overview";document.body.dataset.view=v;requestAnimationFrame(()=>{const a=document.querySelector('nav.tabs a[href="#'+v+'"]');const n=document.querySelector('nav.tabs');if(a&&n&&n.scrollWidth>n.clientWidth)n.scrollTo({left:a.offsetLeft-n.offsetLeft-16,behavior:'smooth'})});VIEWS.forEach(x=>{document.getElementById('v-'+x).hidden=x!==v});document.querySelectorAll('nav.tabs a').forEach(a=>{a.toggleAttribute('aria-current',a.getAttribute('href')==='#'+v);if(a.getAttribute('href')==='#'+v)a.setAttribute('aria-current','page')});}
 addEventListener('hashchange',()=>{route();window.scrollTo(0,0)});
 route();
 initI18n();
