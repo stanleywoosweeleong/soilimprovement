@@ -1,10 +1,10 @@
 import json,re,sys
 from collections import Counter
 from opencc import OpenCC
-src=json.load(open('src.json'));src.update(json.load(open('chunk3.json')));src.update(json.load(open('chunk4.json')));src.update(json.load(open('chunk5.json')));src.update(json.load(open('chunk6.json')))
+src=json.load(open('src.json'));src.update(json.load(open('chunk3.json')));src.update(json.load(open('chunk4.json')));src.update(json.load(open('chunk5.json')));src.update(json.load(open('chunk6.json')));src.update(json.load(open('chunk7.json')))
 def load(lang):
     d={}
-    for n in (1,2,3,4,5,6):
+    for n in (1,2,3,4,5,6,7):
         import os
         if not os.path.exists(f'{lang}.chunk{n}.json'): continue
         d.update(json.load(open(f'{lang}.chunk{n}.json',encoding='utf-8')))
@@ -22,7 +22,11 @@ out={}
 zh=load('zh-Hans');ms=load('ms')
 cc=OpenCC('s2tw')
 # convert text only, never tags
-def conv(s): return ''.join(p if p.startswith('<') else cc.convert(p) for p in re.split(r'(<[^>]+>)',s))
+TW_TERMS={'釐米':'公分'}
+def tw(t):
+    for k,v in TW_TERMS.items(): t=t.replace(k,v)
+    return t
+def conv(s): return ''.join(p if p.startswith('<') else tw(cc.convert(p)) for p in re.split(r'(<[^>]+>)',s))
 zht={k:conv(v) for k,v in zh.items()}
 for lang,d in (('zh-Hans',zh),('zh-Hant',zht),('ms',ms)):
     bad=check(lang,d)
