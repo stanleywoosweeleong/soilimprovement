@@ -81,6 +81,7 @@ def chinese_names(text, trad):
             for rx, hans, hant in NAME_RES:
                 part = rx.sub(hant if trad else hans, part)
             part = re.sub(r"([\u4e00-\u9fff]) (等|著|采访|採訪)", r"\1\2", part)
+            part = re.sub(r"(《[丰豐]年》(?:[杂雜][志誌])?)\s*[（(][丰豐]年[）)]", r"\1", part)  # name already given
         out.append(part)
     return "".join(out)
 
