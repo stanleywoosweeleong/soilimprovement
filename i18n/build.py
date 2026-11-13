@@ -49,8 +49,45 @@ def tw(t):
 def conv(s):
     return "".join(p if p.startswith("<") else tw(cc.convert(p)) for p in re.split(r"(<[^>]+>)", s))
 
+# Co-authors' names as printed in the Tainan DARES publication indexes (Traditional originals).
+# Chinese text must use these, not the romanised forms used in English and Malay.
+NAMES = [  # (romanised forms, longest first), Simplified, Traditional
+    (["Chiang Wen-chin", "Chiang W.C.", "Chiang"], "江汶锦", "江汶錦"),
+    (["Pan Chia-chen", "Pan"], "潘佳辰", "潘佳辰"),
+    (["Yang Shao-jung"], "杨绍荣", "楊紹榮"),
+    (["Yang Ching-fu"], "杨清富", "楊清富"),
+    (["Huang Shan-nei"], "黄山内", "黃山內"),
+    (["Huang Yu-ming"], "黄裕铭", "黃裕銘"),
+    (["Huang Han-ling"], "黄涵灵", "黃涵靈"),
+    (["Huang Yuan-man"], "黄圆满", "黃圓滿"),
+    (["Lin Chin-ching", "Lin C.C."], "林晋卿", "林晉卿"),
+    (["Lin Ching-wei", "Lin C.W."], "林经伟", "林經偉"),
+    (["Lin Kuo-tzu"], "林国词", "林國詞"),
+    (["Cho Chia-jung", "Cho C.J."], "卓家荣", "卓家榮"),
+    (["Chen Shao-chung"], "陈绍崇", "陳紹崇"),
+    (["Mao Jen-chieh", "Mao"], "毛壬杰", "毛壬杰"),
+    (["Chang Chun-chun"], "张淳淳", "張淳淳"),
+    (["Liu Yi-chang"], "刘依昌", "劉依昌"),
+    (["Cheng An-hsiu"], "郑安秀", "鄭安秀"),
+    (["Sun Wen-chang"], "孙文章", "孫文章"),
+    (["Tseng Yi-ling"], "曾怡陵", "曾怡陵"),
+]
+NAME_RES = [(re.compile(r"(?<![A-Za-z])" + re.escape(f) + r"(?![A-Za-z])"), hans, hant)
+            for forms, hans, hant in NAMES for f in forms]
+def chinese_names(text, trad):
+    out = []
+    for part in re.split(r"(<[^>]+>)", text):
+        if not part.startswith("<"):
+            for rx, hans, hant in NAME_RES:
+                part = rx.sub(hant if trad else hans, part)
+            part = re.sub(r"([\u4e00-\u9fff]) (等|著|采访|採訪)", r"\1\2", part)
+        out.append(part)
+    return "".join(out)
+
 zh = load("zh-Hans"); ms = load("ms")
-langs = (("zh-Hans", zh), ("zh-Hant", {k: conv(v) for k, v in zh.items()}), ("ms", ms))
+langs = (("zh-Hans", {k: chinese_names(v, False) for k, v in zh.items()}),
+         ("zh-Hant", {k: chinese_names(conv(v), True) for k, v in zh.items()}),
+         ("ms", ms))
 out, failed = {}, False
 for lang, d in langs:
     bad = check(d)
