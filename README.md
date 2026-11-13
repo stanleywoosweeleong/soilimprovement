@@ -1,6 +1,6 @@
-# Huang Soil Atlas
+# 土壤修复 · Soil Recovery
 
-A single-page reference app on the soil research and field methods of **Dr. Huang Jui-chang (黄瑞彰)**, the "Soil Nutritionist" at Taiwan's Tainan District Agricultural Research and Extension Station (Tainan DARES). It was compiled for Malaysian growers attending his course in Shah Alam on 9 December 2026.
+**土壤修复 (Soil Recovery)**, formerly "Huang Soil Atlas", is a single-page reference app on the soil research and field methods of **Dr. Huang Jui-chang (黄瑞彰)**, the "Soil Nutritionist" at Taiwan's Tainan District Agricultural Research and Extension Station (Tainan DARES). It was compiled for Malaysian growers attending his course in Shah Alam on 9 December 2026.
 
 The app is available in **English, 简体中文, 繁體中文 and Bahasa Melayu**. Choose a language from the header; the choice is remembered on that device.
 

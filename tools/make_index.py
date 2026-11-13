@@ -20,7 +20,7 @@ page = (
     '<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">\n'
     '<meta name="mobile-web-app-capable" content="yes">\n'
     '<meta name="apple-mobile-web-app-capable" content="yes">\n'
-    '<meta name="apple-mobile-web-app-title" content="Soil Atlas">\n'
+    '<meta name="apple-mobile-web-app-title" content="土壤修复">\n'
     '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">\n'
     + head +
     '\n<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>\n'

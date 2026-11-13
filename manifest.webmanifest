@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Huang Soil Atlas",
-  "short_name": "Soil Atlas",
+  "name": "土壤修复 Soil Recovery",
+  "short_name": "土壤修复",
   "description": "Dr. Huang Jui-chang's soil research and soil recovery methods, in English, Simplified Chinese, Traditional Chinese and Malay. Works offline.",
   "lang": "en",
   "dir": "ltr",
