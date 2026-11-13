@@ -133,6 +133,9 @@ dl.facts dd{margin:0;font-weight:500}
 .bar .fill{height:18px;flex:none;border-radius:0 4px 4px 0;min-width:2px;transition:filter .15s}
 .bar:hover .fill{filter:brightness(1.12)}
 .bar .val{font-family:var(--f-mono);font-size:.74rem;color:var(--ink);margin-left:6px;white-space:nowrap}
+:root{--barK:.82}
+@media (max-width:420px){:root{--barK:.6}}
+@media (max-width:380px){#charts .bar .who{display:none}}
 .bar .who{font-size:.68rem;color:var(--muted);margin-left:6px;line-height:1.2;min-width:0}
 .takeaway{font-size:.9rem;color:var(--muted)}
 .takeaway b{color:var(--ink)}
@@ -1291,7 +1294,7 @@ const C=[
 ];
 const LBL={c:"Control",t:"Treated"};
 function fmt(v){return v>=1000?v.toLocaleString('en-US'):String(v)}
-function bar(v,max,min,cls,who,tip){const w=Math.max(1,((v-min)/(max-min))*100*0.82);return `<div class="bar" data-tip="${tip}"><div class="fill" style="width:${w}%;background:var(--s-${cls==='c'?'control':'treated'})"></div><span class="val">${fmt(v)}</span>${who?`<span class="who">${who}</span>`:''}</div>`}
+function bar(v,max,min,cls,who,tip){const w=Math.max(1,((v-min)/(max-min))*100);return `<div class="bar" data-tip="${tip}"><div class="fill" style="width:calc(var(--barK) * ${w}%);background:var(--s-${cls==='c'?'control':'treated'})"></div><span class="val">${fmt(v)}</span>${who?`<span class="who">${who}</span>`:''}</div>`}
 document.getElementById('charts').innerHTML=C.map((c,ci)=>{
   let rows,tbl,max,min=c.min||0;
   if(c.pairRows||c.pair){
@@ -1547,7 +1550,7 @@ function renderLB(){
   const g=x=>Math.round(x).toLocaleString('en-US');
   let lean='Balanced';if(sum>0){const sh=t.map(x=>x/sum);const i=sh.indexOf(Math.max(...sh));if(sh[i]>0.45)lean=["Leans toward nitrogen","Leans toward phosphorus","Leans toward potassium"][i]}else lean='No N, P or K in this mix';
   document.getElementById('lb-out').innerHTML=`<div class="eyebrow">Estimated nutrients going into your ${g(vol)} L drum</div>`+
-   t.map((v,k)=>`<div class="row"><div class="lab">${names[k]}<small>${sum?Math.round(v/sum*100):0}% of total</small></div><div class="bars"><div class="bar" data-tip="${names[k]}: ${g(v)} g · ${lbPreset} as written: ${g(ref[k])} g"><div class="fill" style="width:${Math.max(.5,v/max*82)}%;background:var(--s-treated)"></div><span class="val">${g(v)} g</span></div><div class="bar" data-tip="${lbPreset} as written: ${g(ref[k])} g"><div class="fill" style="width:${Math.max(.5,ref[k]/max*82)}%;background:var(--line)"></div><span class="who">${lbPreset} as written: ${g(ref[k])} g</span></div></div></div>`).join('')+
+   t.map((v,k)=>`<div class="row"><div class="lab">${names[k]}<small>${sum?Math.round(v/sum*100):0}% of total</small></div><div class="bars"><div class="bar" data-tip="${names[k]}: ${g(v)} g · ${lbPreset} as written: ${g(ref[k])} g"><div class="fill" style="width:calc(var(--barK) * ${Math.max(.5,v/max*100)}%);background:var(--s-treated)"></div><span class="val">${g(v)} g</span></div><div class="bar" data-tip="${lbPreset} as written: ${g(ref[k])} g"><div class="fill" style="width:calc(var(--barK) * ${Math.max(.5,ref[k]/max*100)}%);background:var(--line)"></div><span class="who">${lbPreset} as written: ${g(ref[k])} g</span></div></div></div>`).join('')+
    `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="chip acc">${lean}</span><span class="takeaway">Totals in the ingredients, not in the finished liquid.</span></div>`;
   const W=[];const solids=amts[0]+amts[1]+amts[2]+amts[3];
   if(amts[0]===0&&lbPreset==="High-N")W.push(['bad','No nitrogen source',`Nitrogen drops to ${sum?g(t[0]):0} g, about ${ref[0]?Math.round(t[0]/ref[0]*100):0}% of the recipe. This is no longer a High-N brew. Use rapeseed, peanut, fish, blood or feather meal, or expired milk or eggs.`]);
