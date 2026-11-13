@@ -22,6 +22,16 @@ The app is available in **English, 简体中文, 繁體中文 and Bahasa Melayu*
 
 Yields and rates are shown per **acre** (converted from the papers' per-0.1-hectare figures).
 
+## Install and offline use
+
+The app is a Progressive Web App. Open it once while online and it saves itself on the device, including the fonts it uses; after that it opens with no connection.
+
+- **iPhone / iPad (Safari):** Share → **Add to Home Screen**.
+- **Android (Chrome):** menu → **Install app** (or **Add to Home screen**).
+- **Desktop (Chrome / Edge):** the install icon in the address bar.
+
+When a new version is published, the app shows "A new version is available" with an **Update** button.
+
 ## Using it
 
 Open `index.html` in any modern browser; no build step or server is needed. Fonts load from Google Fonts when online and fall back to system fonts offline.
@@ -34,6 +44,10 @@ To publish with GitHub Pages: **Settings → Pages → Deploy from a branch → 
 index.html            The app (standalone; translations embedded)
 tools/make_index.py   Wraps the editing copy into a standalone index.html
 tools/script_maps.py  Embeds Simplified/Traditional conversion maps
+tools/make_icons.py   Draws the app icons into icons/
+tools/make_pwa.py     Writes manifest.webmanifest and sw.js (cache version = hash of shipped files)
+tools/pwa_snippet.html  Service-worker registration and update prompt, added by make_index.py
+manifest.webmanifest, sw.js, icons/   PWA files (generated)
 i18n/                 Translation sources and tooling
   RULES.md            Translation rules and terminology table
   src.json, chunk*.json            English source strings, by batch
