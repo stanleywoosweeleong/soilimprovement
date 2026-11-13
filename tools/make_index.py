@@ -1,7 +1,11 @@
 """Wrap the artifact page (no <html>/<head>/<body>) into a standalone index.html."""
 import sys, os
 PWA = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "pwa_snippet.html"), encoding="utf-8").read()
-src, out = sys.argv[1], sys.argv[2]
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+src = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "src", "app.html")
+out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "index.html")
+if "<!doctype" in open(src, encoding="utf-8").read(200).lower():
+    sys.exit("make_index: %s is already a wrapped page; pass the editing source src/app.html" % src)
 s = open(src, encoding="utf-8").read()
 cut = s.index("</style>") + len("</style>")
 head, body = s[:cut], s[cut:]

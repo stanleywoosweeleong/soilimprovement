@@ -3,16 +3,17 @@
 hans: character map Traditional->Simplified for every Han character in the page.
 hant: phrase map Simplified->Traditional (Taiwan) for every Han run outside the
       translation dictionary (static text, data, preserved Chinese labels).
-Usage: python3 script_maps.py page.html
+Usage: python3 script_maps.py [page.html]   (default: src/app.html)
 """
 import json, re, sys
 from opencc import OpenCC
-page = sys.argv[1]
+ROOT = __import__("os").path.dirname(__import__("os").path.dirname(__import__("os").path.abspath(__file__)))
+page = sys.argv[1] if len(sys.argv) > 1 else __import__("os").path.join(ROOT, "src", "app.html")
 s = open(page, encoding="utf-8").read()
 t2s, s2t = OpenCC("t2s"), OpenCC("s2tw")
 HAN = r"[㐀-鿿豈-﫿]"
 hans = {}
-for ch in set(re.findall(HAN, s)):
+for ch in sorted(set(re.findall(HAN, s))):
     c = t2s.convert(ch)
     if c != ch:
         hans[ch] = c
@@ -22,11 +23,11 @@ m0 = outside.find("const SCRIPT_MAPS=")
 if m0 >= 0:
     outside = outside[:m0] + outside[outside.index(";/*SCRIPT_MAPS*/", m0):]
 hant = {}
-for run in set(re.findall(HAN + "+", outside)):
+for run in sorted(set(re.findall(HAN + "+", outside))):
     c = s2t.convert(run)
     if c != run:
         hant[run] = c
-data = json.dumps({"hans": hans, "hant": hant}, ensure_ascii=False)
+data = json.dumps({"hans": hans, "hant": hant}, ensure_ascii=False, sort_keys=True)
 marker = "const SCRIPT_MAPS="
 if marker in s:
     a = s.index(marker); b = s.index(";/*SCRIPT_MAPS*/", a)

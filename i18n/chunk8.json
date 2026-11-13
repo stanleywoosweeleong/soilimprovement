@@ -1,0 +1,8 @@
+{
+ "k40000": "Leans toward nitrogen",
+ "k40001": "Check value",
+ "k40002": "Check your numbers",
+ "k40003": "A value is outside the possible range. EC and nutrients cannot be negative, and pH runs from {0} to {1}.",
+ "k40004": "e.g. EC, Brix, mycorrhiza",
+ "k40005": "Under a roof (greenhouse / rain shelter)"
+}

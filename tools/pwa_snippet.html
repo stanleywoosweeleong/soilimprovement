@@ -1,5 +1,6 @@
 <style>
-#pwa-toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:60;display:flex;align-items:center;gap:12px;max-width:calc(100% - 32px);padding:10px 12px 10px 16px;border-radius:12px;background:var(--ink);color:var(--bg);font-size:.9rem;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+#pwa-toast{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(96px,calc(env(safe-area-inset-right,0px) + 96px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);margin:0 auto;width:fit-content;z-index:60;display:flex;align-items:center;gap:12px;max-width:calc(100% - 32px);padding:10px 12px 10px 16px;border-radius:12px;background:var(--ink);color:var(--bg);font-size:.9rem;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+#pwa-toast .x{background:transparent!important;color:inherit!important;font-size:1.2rem!important;padding:4px 8px!important;min-width:38px}
 #pwa-toast button{font:inherit;font-weight:700;border:0;border-radius:8px;padding:8px 14px;min-height:38px;background:var(--accent);color:#fff;cursor:pointer}
 </style>
 <script>
@@ -11,19 +12,23 @@
          'zh-Hant':['已儲存到本裝置，可離線使用。','有新版本。','更新'],
          'ms':['Disimpan pada peranti ini. Boleh digunakan di luar talian.','Versi baharu tersedia.','Kemas kini']};
   function L(){return T[document.documentElement.lang]||T.en}
-  function toast(msg,btn,onBtn){var t=document.getElementById('pwa-toast');if(!t){t=document.createElement('div');t.id='pwa-toast';t.setAttribute('data-noi18n','');t.setAttribute('role','status');document.body.appendChild(t)}
-    t.textContent='';var s=document.createElement('span');s.textContent=msg;t.appendChild(s);
-    if(btn){var b=document.createElement('button');b.type='button';b.textContent=btn;b.onclick=onBtn;t.appendChild(b)}
-    t.hidden=false;if(!btn)setTimeout(function(){t.hidden=true},4500)}
+  var shown=null; /* [messageIndex, action] so the text can follow language switches */
+  function draw(){var t=document.getElementById('pwa-toast');if(!t||!shown)return;var l=L();t.textContent='';
+    var s=document.createElement('span');s.textContent=l[shown[0]];t.appendChild(s);
+    if(shown[1]){var b=document.createElement('button');b.type='button';b.textContent=l[2];b.onclick=shown[1];t.appendChild(b)}
+    var x=document.createElement('button');x.type='button';x.className='x';x.setAttribute('aria-label','×');x.textContent='×';x.onclick=function(){t.hidden=true;shown=null};t.appendChild(x)}
+  function toast(i,onBtn){var t=document.getElementById('pwa-toast');if(!t){t=document.createElement('div');t.id='pwa-toast';t.setAttribute('data-noi18n','');t.setAttribute('role','status');document.body.appendChild(t)}
+    shown=[i,onBtn||null];draw();t.hidden=false;if(!onBtn)setTimeout(function(){if(shown&&shown[0]===i&&!shown[1]){t.hidden=true;shown=null}},4500)}
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   var wantReload=false;
   navigator.serviceWorker.addEventListener('controllerchange',function(){if(wantReload){wantReload=false;location.reload()}});
   window.addEventListener('load',function(){
     navigator.serviceWorker.register('sw.js',{scope:'./'}).then(function(reg){
       var firstInstall=!navigator.serviceWorker.controller,seen=[];
-      function offerUpdate(w){toast(L()[1],L()[2],function(){wantReload=true;w.postMessage('skipWaiting')})}
+      function offerUpdate(w){toast(1,function(){wantReload=true;w.postMessage('skipWaiting')})}
       function track(w){if(!w||seen.indexOf(w)>=0)return;seen.push(w);w.addEventListener('statechange',function(){
         if(w.state==='installed'&&navigator.serviceWorker.controller&&!firstInstall)offerUpdate(w);
-        if(w.state==='activated'&&firstInstall){firstInstall=false;toast(L()[0])}})}
+        if(w.state==='activated'&&firstInstall){firstInstall=false;toast(0)}})}
       if(reg.waiting&&navigator.serviceWorker.controller)offerUpdate(reg.waiting);
       track(reg.installing);
       reg.addEventListener('updatefound',function(){track(reg.installing)});
