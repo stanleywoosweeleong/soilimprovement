@@ -233,6 +233,7 @@ details.more>.body{display:grid;gap:10px}
 .tabbar{background:var(--humus)}
 .tabbar .wrap{padding-block:6px 0}
 .lshort{display:none}
+html[lang^="zh"] .sym .hd>.zh,html[lang^="zh"] .principle .zhname{display:none}
 @media (max-width:700px){
   body{font-size:16px}
   .top .wrap{padding-block:12px 10px!important;gap:8px!important}
@@ -552,7 +553,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
     <h2>Soil recovery playbook</h2>
     <p class="lede" style="margin-top:8px">Dr. Huang's methods, put in working order for a degraded plot. Steps 1–5 repair the soil. Steps 6–9 keep it healthy. Retest after 6–12 months.</p>
   </div>
-  <div class="formula"><span class="zh">育苗期拌菌根、田间灌溶磷、肥料减施三分之一</span>
+  <div class="formula"><span class="zh" data-hant="育苗期拌菌根、田間灌溶磷、肥料減施三分之一">育苗期拌菌根、田间灌溶磷、肥料减施三分之一</span>
     <small>Dr. Huang's 2026 summary formula: mix mycorrhizal fungi into the nursery mix, drench phosphate-solubilizing bacteria in the field, and cut chemical fertilizer by one-third.</small></div>
 
   <ol class="steps">
@@ -1368,6 +1369,8 @@ var LANG='en';
 function hasLetters(s){return /[A-Za-zÀ-ɏ]/.test(String(s).replace(/<[^>]+>/g,'').replace(/&[a-z]+;/g,''))}
 function i18nKey(html){const nums=[];let i=0;const key=String(html).replace(/\s+/g,' ').trim().split(/(<[^>]+>)/).map(pt=>pt.startsWith('<')?pt:pt.replace(NUM,m=>{nums.push(m);return '{'+(i++)+'}'})).join('');return {key,nums}}
 function fillNums(t,nums){return t.replace(/\{(\d+)\}/g,(m,k)=>nums[+k]!==undefined?nums[+k]:m)}
+function dedupeZh(h){return h.replace(/\s*·\s*<span class="zh">([^<]*)<\/span>/g,(m,z)=>h.replace(m,'').includes(z)?'':m)}
+function stripZh(h){return h.replace(/\s*[（(]\s*<span class="zh">[^<]*<\/span>\s*[）)]/g,'').replace(/\s*<span class="zh">[^<]*<\/span>/g,'')}
 function tr(s){if(!LANG||LANG==='en'||!s)return s;const {key,nums}=i18nKey(s);const t=I18N_DICT[LANG]&&I18N_DICT[LANG][key];return t?fillNums(t,nums):s}
 function splitCase(el){const kids=el.children.length;if(kids<2)return false;for(const n of el.childNodes)if(n.nodeType===3&&n.nodeValue.trim())return false;return true}
 function inlineOnly(el){for(const n of el.childNodes){if(n.nodeType===1){if(!INLINE.has(n.tagName)||!inlineOnly(n))return false}}return true}
@@ -1388,7 +1391,7 @@ function translateAll(){
   const units=i18nUnits();
   for(const u of units){const cur=getv(u);let rec=ORIG.get(u.n);if(!rec||cur!==rec.out){rec={src:cur,out:cur};ORIG.set(u.n,rec)}
     let res=rec.src;
-    if(LANG!=='en'){const src=rec.src;const lead=u.t==='text'?src.match(/^\s*/)[0]:'',trail=u.t==='text'?src.match(/\s*$/)[0]:'';const t=tr(src.trim());if(t!==src.trim())res=lead+t+trail}
+    if(LANG!=='en'){const src=rec.src;const lead=u.t==='text'?src.match(/^\s*/)[0]:'',trail=u.t==='text'?src.match(/\s*$/)[0]:'';const t=tr(src.trim());if(t!==src.trim())res=lead+t+trail;if(LANG.startsWith('zh')&&u.t==='html'&&!u.n.closest('.formula'))res=u.n.closest('.term')?dedupeZh(res):stripZh(res)}
     if(res!==cur)setv(u,res);rec.out=getv(u)}
   document.querySelectorAll(ATTRS.map(a=>'['+a+']').join(',')).forEach(el=>{if(el.closest('[data-noi18n]'))return;let m=AORIG.get(el);if(!m){m={};AORIG.set(el,m)}
     ATTRS.forEach(a=>{if(!el.hasAttribute(a))return;const cur=el.getAttribute(a);let r=m[a];if(!r||cur!==r.out){r={src:cur,out:cur};m[a]=r}const res=LANG==='en'?r.src:tr(r.src);if(res!==cur)el.setAttribute(a,res);r.out=res})});
@@ -1396,7 +1399,7 @@ function translateAll(){
 }
 const i18nMO=new MutationObserver(()=>{if(LANG!=='en')translateAll()});
 function setLang(l){if(!['en','zh-Hans','zh-Hant','ms'].includes(l))l='en';LANG=l;document.documentElement.lang=l;try{localStorage.setItem('soilAtlasLang',l)}catch(e){}
-  document.querySelectorAll('#langs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));translateAll()}
+  document.querySelectorAll('#langs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));document.querySelectorAll('[data-hant]').forEach(el=>{if(!el.dataset.hans)el.dataset.hans=el.textContent;el.textContent=l==='zh-Hant'?el.dataset.hant:el.dataset.hans});translateAll()}
 function initI18n(){document.getElementById('langs').addEventListener('click',e=>{const b=e.target.closest('button[data-lang]');if(b)setLang(b.dataset.lang)});
   let l=null;try{l=localStorage.getItem('soilAtlasLang')}catch(e){}
   if(!l){const n=(navigator.language||'').toLowerCase();l=/^zh-(tw|hk|mo|hant)/.test(n)?'zh-Hant':n.startsWith('zh')?'zh-Hans':n.startsWith('ms')?'ms':'en'}
