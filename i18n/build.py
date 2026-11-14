@@ -41,11 +41,17 @@ def check(d):
 
 cc = OpenCC("s2tw")
 # Taiwan usage fixes OpenCC gets wrong in this content (干 -> 乾 for "dry", cm -> 公分).
-TW_TERMS = {"釐米": "公分", "幹血粉": "乾血粉", "變幹": "變乾"}
+TW_TERMS = {"釐米": "公分", "幹血粉": "乾血粉", "變幹": "變乾",
+            # OpenCC s2tw picks the wrong traditional character for these words.
+            "錶格": "表格",                                   # table, not watch
+            "自制": "自製", "堆制": "堆製", "蒸制": "蒸製",      # 製 = make / process
+            "配制": "配製", "編制": "編製",
+            "衝到": "沖到", "衝下去": "沖下去", "衝不掉": "沖不掉",  # 沖 = flush with water
+            "台南": "臺南"}                                   # one spelling, as in 臺灣 / 臺南區農業改良場
 def tw(t):
     for k, v in TW_TERMS.items():
         t = t.replace(k, v)
-    return t
+    return re.sub(r"(?<=[}\d] )周(?!圍)|(?<=[}\d])周(?!圍)", "週", t)  # weeks: 週 in Taiwan; 周圍 stays
 def conv(s):
     return "".join(p if p.startswith("<") else tw(cc.convert(p)) for p in re.split(r"(<[^>]+>)", s))
 
