@@ -17,12 +17,12 @@
 <title>土壤修复 Soil Recovery</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400..700&family=Noto+Sans+TC:wght@400..700&display=swap">
 <style>
 /* Layout: field-notebook app. Dark humus header band with a soil-horizon strip, tabbed views, content column ≤1080px. */
 :root{
   --f-cjk:"Noto Sans SC","Noto Sans TC";
-  --bg:#F2F4EE; --surface:#FFFFFF; --sunk:#E8ECE3; --ink:#18201A; --muted:#566257; --line:#D3DACD;
+  --bg:#F2F4EE; --surface:#FFFFFF; --sunk:#E8ECE3; --ink:#18201A; --muted:#4B564C; --line:#D3DACD;
   --humus:#2B2119; --humus-ink:#F3ECE1; --humus-muted:#C4B39C;
   --accent:#12704A; --accent-soft:#DCEEE3; --clay:#B5802A; --clay-soft:#F4E7CF;
   --good:#1F7A3E; --warn:#A66300; --bad:#B3261E; --good-bg:#E1F2E6; --warn-bg:#FBEBD2; --bad-bg:#F9E0DE;
@@ -32,13 +32,13 @@
   --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#121713; --surface:#1A201B; --sunk:#151B16; --ink:#E5EBE3; --muted:#9DAA9D; --line:#2D372E;
+  --bg:#121713; --surface:#1A201B; --sunk:#151B16; --ink:#E5EBE3; --muted:#AAB6A9; --line:#2D372E;
   --humus:#120D09; --humus-ink:#EDE5D8; --humus-muted:#A8977F;
   --accent:#5DBB86; --accent-soft:#1D3527; --clay:#D2A04E; --clay-soft:#3A2E18;
   --good:#6CC98A; --warn:#E9A94A; --bad:#F08A80; --good-bg:#1B3323; --warn-bg:#3A2A12; --bad-bg:#3D1C1A;
   --s-control:#A8782A; --s-treated:#3FA66A; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#121713; --surface:#1A201B; --sunk:#151B16; --ink:#E5EBE3; --muted:#9DAA9D; --line:#2D372E;
+  --bg:#121713; --surface:#1A201B; --sunk:#151B16; --ink:#E5EBE3; --muted:#AAB6A9; --line:#2D372E;
   --humus:#120D09; --humus-ink:#EDE5D8; --humus-muted:#A8977F;
   --accent:#5DBB86; --accent-soft:#1D3527; --clay:#D2A04E; --clay-soft:#3A2E18;
   --good:#6CC98A; --warn:#E9A94A; --bad:#F08A80; --good-bg:#1B3323; --warn-bg:#3A2A12; --bad-bg:#3D1C1A;
@@ -61,7 +61,9 @@ html[lang="zh-Hant"]{--f-cjk:"Noto Sans TC","Noto Sans SC"}
 .langmenu button[aria-pressed="true"] .tick{visibility:visible}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.6}
+:root{--w-body:450}
+html[lang^="zh"]{--w-body:500}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.6;font-weight:var(--w-body)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--humus)}
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
@@ -69,7 +71,7 @@ h2{font-size:clamp(1.5rem,3.2vw,2rem);font-weight:700;letter-spacing:-.01em}
 h3{font-size:1.12rem;font-weight:700}
 p{margin:0}
 a{color:var(--accent)}
-.zh{font-family:var(--f-cjk),var(--f-body);font-weight:400}
+.zh{font-family:var(--f-cjk),var(--f-body);font-weight:500}
 .mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 .eyebrow{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
@@ -188,7 +190,7 @@ th.n{text-align:right}
 form.inputs{display:grid;gap:12px}
 .field{display:grid;grid-template-columns:1fr 110px;gap:4px 10px;align-items:center}
 .field label{font-weight:600;font-size:.9rem}
-.field label small{display:block;font-weight:400;color:var(--muted);font-size:.74rem}
+.field label small{display:block;font-weight:var(--w-body);color:var(--muted);font-size:.74rem}
 .field input{font-family:var(--f-mono);font-size:.95rem;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:100%}
 .btnrow{display:flex;gap:8px;flex-wrap:wrap}
 button.btn{font:inherit;font-weight:600;font-size:.86rem;border-radius:7px;padding:7px 13px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
