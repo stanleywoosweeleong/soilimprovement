@@ -1,0 +1,16 @@
+{
+ "k99000": "The targets assume these lab methods: EC with {0} part soil to {1} parts water, pH with {2} part soil to {3} part water, and phosphorus by the Bray-{4} method. For EC, choose your lab's method and unit (or your meter's) under the EC box and the checker converts the reading. For the other values, ask the lab which method they used if it differs. This tool is a guide, not a replacement for the lab's own recommendation.",
+ "k99001": "Lab method",
+ "k99002": "Saturated paste (ECe)",
+ "k99003": "Soil texture",
+ "k99004": "Unit on report or meter",
+ "k99005": "Type the reading as shown; the checker converts it to EC {0}:{1}.",
+ "k99006": "Used by the checker: <b>{0} dS/m</b> at EC {1}:{2}.",
+ "k99007": "Used by the checker: <b>{0} dS/m</b> at EC {1}:{2}. <span class=\"ec-est\">Estimate: saturated-paste conversion depends on soil texture (Slavich &amp; Petterson, {3}).</span>",
+ "k99008": "Used by the checker: <b>{0} dS/m</b> at EC {1}:{2}. <span class=\"ec-est\">Estimate: scaled by the amount of water; the true factor varies with the soil.</span>",
+ "k99009": "mS/cm",
+ "k99010": "mmhos/cm",
+ "k99011": "µS/cm",
+ "k99012": "ppm (TDS meter, {0} scale)",
+ "k99013": "{0}:{1} (Dr. Huang, this app)"
+}

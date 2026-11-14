@@ -1,0 +1,16 @@
+{
+ "k99000": "Sasaran ini berdasarkan kaedah makmal berikut: EC dengan {0} bahagian tanah kepada {1} bahagian air, pH dengan {2} bahagian tanah kepada {3} bahagian air, dan fosforus dengan kaedah Bray-{4}. Untuk EC, pilih kaedah dan unit makmal anda (atau meter anda) di bawah kotak EC dan penyemak akan menukar bacaannya. Untuk nilai lain, tanya makmal kaedah yang digunakan jika berbeza. Alat ini hanya panduan, bukan pengganti cadangan makmal.",
+ "k99001": "Kaedah makmal",
+ "k99002": "Pes tepu (ECe)",
+ "k99003": "Tekstur tanah",
+ "k99004": "Unit pada laporan atau meter",
+ "k99005": "Taip bacaan seperti yang tertera; penyemak akan menukarnya kepada EC {0}:{1}.",
+ "k99006": "Digunakan oleh penyemak: <b>{0} dS/m</b> pada EC {1}:{2}.",
+ "k99007": "Digunakan oleh penyemak: <b>{0} dS/m</b> pada EC {1}:{2}. <span class=\"ec-est\">Anggaran: penukaran pes tepu bergantung pada tekstur tanah (Slavich &amp; Petterson, {3}).</span>",
+ "k99008": "Digunakan oleh penyemak: <b>{0} dS/m</b> pada EC {1}:{2}. <span class=\"ec-est\">Anggaran: diskala mengikut jumlah air; faktor sebenar berbeza mengikut tanah.</span>",
+ "k99009": "mS/cm",
+ "k99010": "mmhos/cm",
+ "k99011": "µS/cm",
+ "k99012": "ppm (meter TDS, skala {0})",
+ "k99013": "{0}:{1} (Dr. Huang, aplikasi ini)"
+}
