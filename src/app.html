@@ -74,6 +74,9 @@ nav.tabs a{flex:none;color:var(--humus-muted);text-decoration:none;padding:7px 1
 nav.tabs a:hover{color:var(--humus-ink);border-color:var(--humus-muted)}
 nav.tabs a[aria-current="page"]{background:var(--tab-on-bg);color:var(--tab-on-fg);border-color:var(--tab-on-bg);box-shadow:0 0 0 2px var(--accent)}
 :root{--tab-on-bg:#F2F4EE;--tab-on-fg:#14201A}
+:root{--soil-o:#22301F;--soil-a:#3D2C1E;--soil-b:#6A4A2E;--soil-c:#9C7448;--soil-r:#C49C68;--pebble:#F6F0E4;--pebble-hi:#FFFAF0;--pebble-ink:#2B2017}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--soil-o:#111A12;--soil-a:#2B2016;--soil-b:#4A3421;--soil-c:#6E5233;--soil-r:#8C6B45;--pebble:#E4DCCB;--pebble-hi:#F0E8D8;--pebble-ink:#211810}}
+:root[data-theme="dark"]{--soil-o:#111A12;--soil-a:#2B2016;--soil-b:#4A3421;--soil-c:#6E5233;--soil-r:#8C6B45;--pebble:#E4DCCB;--pebble-hi:#F0E8D8;--pebble-ink:#211810}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--tab-on-bg:#E8F0E6;--tab-on-fg:#0C110D}}
 :root[data-theme="dark"]{--tab-on-bg:#E8F0E6;--tab-on-fg:#0C110D}
 .navrow{display:flex;align-items:flex-start;gap:10px}
@@ -331,6 +334,19 @@ html:not([lang^="zh"]) #v-sources .zh,html:not([lang^="zh"]) #v-library .zh{disp
   body.nav-open .navtoggle svg{transform:rotate(180deg)}
   .navrow nav.tabs{display:none;position:absolute;left:0;right:0;top:100%;z-index:16;background:var(--humus);grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px));max-height:calc(100vh - 120px);overflow-y:auto;box-shadow:0 12px 24px rgba(0,0,0,.35)}
   body.nav-open .navrow nav.tabs{display:grid}
+  /* Section menu as a soil profile: humus on top, then topsoil, subsoil and sandy parent material,
+     with the section buttons as pebbles. A scrim dims the page so the menu reads as a layer on top. */
+  .navrow nav.tabs{
+    background:
+      radial-gradient(circle at 18% 22%,rgba(255,240,215,.07) 0 1.6px,transparent 2.4px) 0 0/44px 36px,
+      radial-gradient(circle at 70% 64%,rgba(0,0,0,.16) 0 2.2px,transparent 3px) 0 0/58px 46px,
+      radial-gradient(circle at 40% 80%,rgba(255,240,215,.05) 0 2.6px,transparent 3.4px) 0 0/76px 64px,
+      linear-gradient(180deg,var(--soil-o) 0,var(--soil-a) 22%,var(--soil-a) 40%,var(--soil-b) 50%,var(--soil-b) 68%,var(--soil-c) 80%,var(--soil-r) 100%);
+    border-radius:0 0 22px 22px;box-shadow:0 18px 36px rgba(24,14,6,.45);padding-bottom:22px}
+  .navrow nav.tabs a{background:var(--pebble);color:var(--pebble-ink);border:0;border-radius:14px;box-shadow:0 2px 0 rgba(40,24,10,.35),inset 0 1px 0 rgba(255,255,255,.55);font-weight:600}
+  .navrow nav.tabs a:hover{background:var(--pebble-hi);color:var(--pebble-ink)}
+  .navrow nav.tabs a[aria-current="page"]{background:var(--accent);color:var(--bg);box-shadow:0 0 0 2px var(--pebble),0 3px 0 rgba(40,24,10,.4)}
+  body.nav-open::after{content:"";position:fixed;inset:0;z-index:14;background:rgba(28,18,10,.5)}
   nav.tabs a{min-height:46px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.95rem;border-radius:12px;padding:6px 10px;line-height:1.25}
   /* readable type on phones: no text below ~12.5px, a little more weight for small muted text */
   .eyebrow{font-size:.78rem;letter-spacing:.08em;font-weight:600}
