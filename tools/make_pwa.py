@@ -8,7 +8,7 @@ manifest = {
     "id": "./", "name": "土壤修复 Soil Recovery", "short_name": "土壤修复",
     "description": "Dr. Huang Jui-chang's soil research and soil recovery methods, in English, Simplified Chinese, Traditional Chinese and Malay. Works offline.",
     "lang": "en", "dir": "ltr", "start_url": "./", "scope": "./", "display": "standalone",
-    "background_color": "#F2F4EE", "theme_color": "#1E2B21", "categories": ["education", "productivity"],
+    "background_color": "#F2F4EE", "theme_color": "#2B2119", "categories": ["education", "productivity"],
     "icons": [
         {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
         {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},

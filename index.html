@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Dr. Huang Jui-chang's soil research and soil recovery methods, in English, Simplified Chinese, Traditional Chinese and Malay.">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#1E2B21">
+<meta name="theme-color" content="#2B2119" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#120D09" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="icons/favicon.ico" sizes="any">
 <link rel="icon" href="icons/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -22,7 +23,7 @@
 :root{
   --f-cjk:"Noto Sans SC","Noto Sans TC";
   --bg:#F2F4EE; --surface:#FFFFFF; --sunk:#E8ECE3; --ink:#18201A; --muted:#566257; --line:#D3DACD;
-  --humus:#1E2B21; --humus-ink:#EEF2EA; --humus-muted:#AFC0B0;
+  --humus:#2B2119; --humus-ink:#F3ECE1; --humus-muted:#C4B39C;
   --accent:#12704A; --accent-soft:#DCEEE3; --clay:#B5802A; --clay-soft:#F4E7CF;
   --good:#1F7A3E; --warn:#A66300; --bad:#B3261E; --good-bg:#E1F2E6; --warn-bg:#FBEBD2; --bad-bg:#F9E0DE;
   --s-control:#B5802A; --s-treated:#12704A;
@@ -32,13 +33,13 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#121713; --surface:#1A201B; --sunk:#151B16; --ink:#E5EBE3; --muted:#9DAA9D; --line:#2D372E;
-  --humus:#0C110D; --humus-ink:#E5EBE3; --humus-muted:#93A494;
+  --humus:#120D09; --humus-ink:#EDE5D8; --humus-muted:#A8977F;
   --accent:#5DBB86; --accent-soft:#1D3527; --clay:#D2A04E; --clay-soft:#3A2E18;
   --good:#6CC98A; --warn:#E9A94A; --bad:#F08A80; --good-bg:#1B3323; --warn-bg:#3A2A12; --bad-bg:#3D1C1A;
   --s-control:#A8782A; --s-treated:#3FA66A; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121713; --surface:#1A201B; --sunk:#151B16; --ink:#E5EBE3; --muted:#9DAA9D; --line:#2D372E;
-  --humus:#0C110D; --humus-ink:#E5EBE3; --humus-muted:#93A494;
+  --humus:#120D09; --humus-ink:#EDE5D8; --humus-muted:#A8977F;
   --accent:#5DBB86; --accent-soft:#1D3527; --clay:#D2A04E; --clay-soft:#3A2E18;
   --good:#6CC98A; --warn:#E9A94A; --bad:#F08A80; --good-bg:#1B3323; --warn-bg:#3A2A12; --bad-bg:#3D1C1A;
   --s-control:#A8782A; --s-treated:#3FA66A; color-scheme:dark}
@@ -87,13 +88,13 @@ header.top{background:var(--humus);color:var(--humus-ink)}
 nav.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:0;padding-bottom:16px}
 nav.tabs a{flex:none;color:var(--humus-muted);text-decoration:none;padding:7px 14px;font-weight:600;font-size:.93rem;border-radius:999px;border:1px solid var(--humus-muted);border-color:rgba(175,192,176,.35)}
 nav.tabs a:hover{color:var(--humus-ink);border-color:var(--humus-muted)}
-nav.tabs a[aria-current="page"]{background:var(--tab-on-bg);color:var(--tab-on-fg);border-color:var(--tab-on-bg);box-shadow:0 0 0 2px var(--accent)}
-:root{--tab-on-bg:#F2F4EE;--tab-on-fg:#14201A}
-:root{--soil-o:#22301F;--soil-a:#3D2C1E;--soil-b:#6A4A2E;--soil-c:#9C7448;--soil-r:#C49C68;--pebble:#F6F0E4;--pebble-hi:#FFFAF0;--pebble-ink:#2B2017}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--soil-o:#111A12;--soil-a:#2B2016;--soil-b:#4A3421;--soil-c:#6E5233;--soil-r:#8C6B45;--pebble:#E4DCCB;--pebble-hi:#F0E8D8;--pebble-ink:#211810}}
-:root[data-theme="dark"]{--soil-o:#111A12;--soil-a:#2B2016;--soil-b:#4A3421;--soil-c:#6E5233;--soil-r:#8C6B45;--pebble:#E4DCCB;--pebble-hi:#F0E8D8;--pebble-ink:#211810}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--tab-on-bg:#E8F0E6;--tab-on-fg:#0C110D}}
-:root[data-theme="dark"]{--tab-on-bg:#E8F0E6;--tab-on-fg:#0C110D}
+nav.tabs a[aria-current="page"]{background:var(--tab-on-bg);color:var(--tab-on-fg);border-color:var(--tab-on-bg);box-shadow:0 0 0 2px var(--nav-on)}
+:root{--tab-on-bg:#F6F0E4;--tab-on-fg:#2B2017;--nav-on:#C98A2E;--nav-on-ink:#1F150C}
+:root{--soil-o:#2B2119;--soil-a:#3D2C1E;--soil-b:#6A4A2E;--soil-c:#9C7448;--soil-r:#C49C68;--pebble:#F6F0E4;--pebble-hi:#FFFAF0;--pebble-ink:#2B2017}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--soil-o:#120D09;--soil-a:#2B2016;--soil-b:#4A3421;--soil-c:#6E5233;--soil-r:#8C6B45;--pebble:#E4DCCB;--pebble-hi:#F0E8D8;--pebble-ink:#211810}}
+:root[data-theme="dark"]{--soil-o:#120D09;--soil-a:#2B2016;--soil-b:#4A3421;--soil-c:#6E5233;--soil-r:#8C6B45;--pebble:#E4DCCB;--pebble-hi:#F0E8D8;--pebble-ink:#211810}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--tab-on-bg:#ECE4D4;--tab-on-fg:#1A120A;--nav-on:#D9A050;--nav-on-ink:#1A120A}}
+:root[data-theme="dark"]{--tab-on-bg:#ECE4D4;--tab-on-fg:#1A120A;--nav-on:#D9A050;--nav-on-ink:#1A120A}
 .navrow{display:flex;align-items:flex-start;gap:10px}
 .navrow nav.tabs{flex:1;min-width:0}
 .navtoggle{display:none}
@@ -343,7 +344,7 @@ html:not([lang^="zh"]) #v-sources .zh,html:not([lang^="zh"]) #v-library .zh{disp
   .idrow .sub{display:none!important}
   .tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;box-shadow:0 2px 8px rgba(0,0,0,.18)}
   .navrow{align-items:center;padding-block:6px 10px}
-  .navtoggle{display:inline-flex;flex:1;min-width:0;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--tab-on-bg);color:var(--tab-on-fg);font:700 1rem var(--f-body);cursor:pointer;box-shadow:0 0 0 2px var(--accent)}
+  .navtoggle{display:inline-flex;flex:1;min-width:0;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--tab-on-bg);color:var(--tab-on-fg);font:700 1rem var(--f-body);cursor:pointer;box-shadow:0 0 0 2px var(--nav-on)}
   .navtoggle span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .navtoggle svg{flex:none;transition:transform .2s}
   body.nav-open .navtoggle svg{transform:rotate(180deg)}
@@ -360,7 +361,7 @@ html:not([lang^="zh"]) #v-sources .zh,html:not([lang^="zh"]) #v-library .zh{disp
     border-radius:0 0 22px 22px;box-shadow:0 18px 36px rgba(24,14,6,.45);padding-bottom:22px}
   .navrow nav.tabs a{background:var(--pebble);color:var(--pebble-ink);border:0;border-radius:14px;box-shadow:0 2px 0 rgba(40,24,10,.35),inset 0 1px 0 rgba(255,255,255,.55);font-weight:600}
   .navrow nav.tabs a:hover{background:var(--pebble-hi);color:var(--pebble-ink)}
-  .navrow nav.tabs a[aria-current="page"]{background:var(--accent);color:var(--bg);box-shadow:0 0 0 2px var(--pebble),0 3px 0 rgba(40,24,10,.4)}
+  .navrow nav.tabs a[aria-current="page"]{background:var(--nav-on);color:var(--nav-on-ink);box-shadow:0 0 0 2px var(--pebble),0 3px 0 rgba(40,24,10,.4)}
   body.nav-open::after{content:"";position:fixed;inset:0;z-index:14;background:rgba(28,18,10,.5)}
   nav.tabs a{min-height:46px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.95rem;border-radius:12px;padding:6px 10px;line-height:1.25}
   /* readable type on phones: no text below ~12.5px, a little more weight for small muted text */
