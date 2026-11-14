@@ -310,6 +310,24 @@ html:not([lang^="zh"]) #v-sources .zh,html:not([lang^="zh"]) #v-library .zh{disp
   .takeaway,.note,.legend,.work .meta,.term .full,.field label small,.row .lab small{font-weight:500}
   table{font-size:.95rem}
   th{font-size:.8rem}
+  /* Phone tables. t-num: name on its own line, numbers in aligned columns under it.
+     t-stack: each row becomes a small block with the column headings as labels. */
+  table.t-num,table.t-num thead,table.t-num tbody{display:block}
+  table.t-num tr{display:grid;grid-template-columns:repeat(var(--nc,3),minmax(0,1fr))}
+  table.t-num th:first-child{display:none}
+  table.t-num th,table.t-num td{padding-inline:4px}
+  table.t-num td:first-child{grid-column:1/-1;border-bottom:0;padding-bottom:0;font-weight:600;font-size:.95rem}
+  table.t-num td:not(:first-child){padding-top:4px}
+  table.t-num td[colspan]{grid-column:span var(--nc,3);text-align:right!important}
+  table.t-stack,table.t-stack tbody,table.t-stack tr,table.t-stack td{display:block}
+  table.t-stack thead{display:none}
+  table.t-stack tr{padding:10px 0;border-bottom:1px solid var(--line)}
+  table.t-stack td{border:0;padding:2px 0}
+  table.t-stack td:first-child{font-weight:700;font-size:1rem;padding-bottom:4px}
+  table.t-stack td:not(:first-child)[data-label]::before{content:attr(data-label);display:block;font-size:.74rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  table.t-stack td.n{text-align:left;white-space:normal}
+  table.t-stack td.n[data-label]::before{display:inline;margin-right:6px}
+  table.t-wide th:first-child,table.t-wide td:first-child{position:sticky;left:0;z-index:1;background:var(--surface);min-width:7.5em;box-shadow:1px 0 0 var(--line)}
   .field label small,.gauge .nm small,.row .lab small{font-size:.8rem}
   .work .meta,.term .full{font-size:.9rem}
   .sym .look,.term p,.principle ul,.sym dd,.steps ul,.work ul,.hero-legend{font-size:1rem}
@@ -695,7 +713,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
     <div class="eyebrow">Greenhouse salt remediation · Budai, Chiayi · Aug 2006</div>
     <h3>Deep ploughing plus flooding brought EC back to normal</h3>
     <div class="tablewrap">
-      <table id="budai">
+      <table id="budai" class="t-wide">
         <thead><tr><th>Treatment</th><th class="n">EC (1:5) dS/m</th><th class="n">pH (1:1)</th><th class="n">OM %</th><th class="n">Bray-1 P mg/kg</th><th class="n">K mg/kg</th><th class="n">Ca mg/kg</th><th class="n">Mg mg/kg</th></tr></thead>
         <tbody></tbody>
       </table>
@@ -707,7 +725,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
     <div class="eyebrow">2020–21 survey · 84 greenhouse vegetable farms · Yunlin, Chiayi, Tainan</div>
     <h3>What over-fertilized soils actually look like</h3>
     <div class="tablewrap">
-      <table>
+      <table class="t-stack">
         <thead><tr><th>Property</th><th class="n">Range found</th><th class="n">Target</th><th>Verdict</th></tr></thead>
         <tbody>
           <tr><td>EC (dS/m)</td><td class="n">0.09 – 4.75</td><td class="n">&lt; 0.6</td><td><span class="chip bad">Mostly too salty</span></td></tr>
@@ -959,7 +977,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
     <div class="eyebrow">Recipe calculator</div>
     <h3>Ingredients for your drum</h3>
     <div class="field" style="max-width:340px"><label for="lf-vol">Water in drum<small>litres · handbook recipes are per 100 L</small></label><input id="lf-vol" type="number" min="1" step="1" value="200" inputmode="numeric"></div>
-    <div class="tablewrap"><table id="lf-table"><thead><tr><th>Ingredient</th><th class="n">High-N</th><th class="n">High-P</th><th class="n">High-K</th></tr></thead><tbody></tbody></table></div>
+    <div class="tablewrap"><table id="lf-table" class="t-num"><thead><tr><th>Ingredient</th><th class="n">High-N</th><th class="n">High-P</th><th class="n">High-K</th></tr></thead><tbody></tbody></table></div>
     <p class="takeaway"><b>High-N</b>: early and middle growth, and as an after-harvest feed for fruit trees. <b>High-P</b> and <b>High-K</b>: flowering and fruiting. For melons and other gourds after flowering, mix High-N and High-P/K in equal parts for balanced feeding.</p>
     <p class="note">Swaps from the handbook: soybean meal can be replaced by rapeseed or peanut meal, or expired milk or eggs. Wood ash can be replaced by palm ash or crude potash. Palm ash is about 30% potash and is easy to find in Malaysia. The handbook does not name a microbe strain for the "beneficial microbes" (<span class="zh">有益微生物</span>); a registered effective-microbe or <i>Bacillus</i> product is the usual choice.</p>
   </div>
@@ -968,7 +986,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
     <div class="eyebrow">How the recipes work</div>
     <h3>Why these ingredients</h3>
     <p class="takeaway">Every brew uses the same six roles. To push a brew toward nitrogen, phosphorus or potassium, raise the ingredient rich in that nutrient and cut the others. The handbook: the nutrient level and balance "can be adjusted by changing the proportions of the materials" (<span class="zh">依不同有機資材之比例調整</span>).</p>
-    <div class="tablewrap"><table>
+    <div class="tablewrap"><table class="t-stack">
       <thead><tr><th>Role</th><th>Ingredient</th><th>Why it's there</th></tr></thead>
       <tbody>
         <tr><td>Nitrogen source</td><td>Soybean meal (7% N), or rapeseed or peanut meal</td><td>Rich in protein, which breaks down to nitrogen</td></tr>
@@ -979,7 +997,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
         <tr><td>Starter</td><td>Beneficial microbes, 2 L per 100 L</td><td>Speeds fermentation and reduces bad smells</td></tr>
       </tbody></table></div>
     <details class="more"><summary>How the three recipes compare</summary><div class="body">
-      <div class="tablewrap"><table>
+      <div class="tablewrap"><table class="t-num">
         <thead><tr><th>Per 100 L of water</th><th class="n">N (g)</th><th class="n">P₂O₅ (g)</th><th class="n">K₂O (g)</th></tr></thead>
         <tbody>
           <tr><td>High-N</td><td class="n"><b>~580</b></td><td class="n">~550</td><td class="n">~680</td></tr>
@@ -1010,7 +1028,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
   <div class="card">
     <div class="eyebrow">Substitutes and omissions</div>
     <h3>If you leave an ingredient out</h3>
-    <div class="tablewrap"><table>
+    <div class="tablewrap"><table class="t-stack">
       <thead><tr><th>Ingredient</th><th>What changes without it</th><th>What to use instead</th></tr></thead>
       <tbody>
         <tr><td><b>Soybean meal</b><br><small>nitrogen source</small></td><td>The brew loses most of its nitrogen. Without it, the High-N recipe keeps only about 30% of its N.</td><td>Rapeseed or peanut meal, fish meal, blood meal or feather meal (13% N, so use about half as much), or expired milk or eggs.</td></tr>
@@ -1050,7 +1068,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
     <div class="card">
       <div class="eyebrow">Using it</div>
       <h3>Dilution and timing</h3>
-      <div class="tablewrap"><table>
+      <div class="tablewrap"><table class="t-stack">
         <thead><tr><th>Method</th><th class="n">Dilution</th><th>Note</th></tr></thead>
         <tbody>
           <tr><td>Soil drench</td><td class="n">30–50×</td><td>No need to filter. Pump onto the root zone.</td></tr>
@@ -1088,7 +1106,7 @@ footer{border-top:1px solid var(--line);padding-block:20px 36px;color:var(--mute
   <div class="card">
     <div class="eyebrow">Reference values from the handbook</div>
     <h3>What each ingredient supplies</h3>
-    <div class="tablewrap"><table>
+    <div class="tablewrap"><table class="t-num">
       <thead><tr><th>Material</th><th class="n">N %</th><th class="n">P₂O₅ %</th><th class="n">K₂O %</th></tr></thead>
       <tbody>
         <tr><td>Rice bran</td><td class="n">2.0</td><td class="n">3.9</td><td class="n">1.5</td></tr>
@@ -1788,8 +1806,11 @@ function translateAll(root){
 }
 function unitRoot(n){let el=n.nodeType===1?n:n.parentElement;if(!el)return null;while(el.parentElement&&el.parentElement!==document.body&&inlineOnly(el.parentElement)&&!splitCase(el.parentElement))el=el.parentElement;return el}
 const i18nMO=new MutationObserver(recs=>{const roots=[];for(const r of recs){const el=unitRoot(r.target);if(!el||!el.isConnected||el.closest('#tip,#pwa-toast,[data-noi18n]'))continue;if(roots.some(x=>x.contains(el)))continue;for(let i=roots.length-1;i>=0;i--)if(el.contains(roots[i]))roots.splice(i,1);roots.push(el)}roots.forEach(r=>translateAll(r))});
+/* Phone table layouts need the column count (t-num) and each heading as a label (t-stack), in the current language. */
+function labelTables(){document.querySelectorAll('table.t-num').forEach(t=>t.style.setProperty('--nc',Math.max(1,t.tHead.rows[0].cells.length-1)));
+  document.querySelectorAll('table.t-stack').forEach(t=>{const h=[...t.tHead.rows[0].cells].map(c=>c.textContent.trim());[...t.tBodies[0].rows].forEach(r=>[...r.cells].forEach((c,i)=>{if(i&&h[i])c.dataset.label=h[i]}))})}
 function setLang(l){if(!['en','zh-Hans','zh-Hant','ms'].includes(l))l='en';LANG=l;document.documentElement.lang=l;try{localStorage.setItem('soilAtlasLang',l)}catch(e){}
-  document.querySelectorAll('#langs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));document.getElementById('langCur').textContent=LANG_SHORT[l];document.getElementById('langBtn').setAttribute('aria-label',LANG_ARIA[l]);document.querySelectorAll('[data-hant]').forEach(el=>{if(!el.dataset.hans)el.dataset.hans=el.textContent;el.textContent=l==='zh-Hant'?el.dataset.hant:el.dataset.hans});translateAll();syncNav();applyTheme(THEME,true)}
+  document.querySelectorAll('#langs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));document.getElementById('langCur').textContent=LANG_SHORT[l];document.getElementById('langBtn').setAttribute('aria-label',LANG_ARIA[l]);document.querySelectorAll('[data-hant]').forEach(el=>{if(!el.dataset.hans)el.dataset.hans=el.textContent;el.textContent=l==='zh-Hant'?el.dataset.hant:el.dataset.hans});translateAll();labelTables();syncNav();applyTheme(THEME,true)}
 /* Header language menu: one globe button showing the current language; opens a short list of all four. */
 const LANG_SHORT={en:'EN','zh-Hans':'简','zh-Hant':'繁',ms:'BM'};
 const LANG_ARIA={en:'Language: English','zh-Hans':'语言：简体中文','zh-Hant':'語言：繁體中文',ms:'Bahasa: Bahasa Melayu'};
@@ -1808,7 +1829,7 @@ function initI18n(){initLangMenu();document.getElementById('langs').addEventList
   const first=storage&&!l;
   if(!l){const n=(navigator.language||'').toLowerCase();l=/^zh-(tw|hk|mo|hant)/.test(n)?'zh-Hant':n.startsWith('zh')?'zh-Hans':n.startsWith('ms')?'ms':'en'}
   i18nMO.observe(document.body,{childList:true,subtree:true,characterData:true});
-  if(first){document.documentElement.lang=l;LANG=l;translateAll();showLangPick(l)}else setLang(l)}
+  if(first){document.documentElement.lang=l;LANG=l;translateAll();labelTables();showLangPick(l)}else setLang(l)}
 /* ---------- onboarding: pick a language on first launch ----------
    Shown only when no language has ever been saved on this device (and storage works);
    the choice persists, so later launches open straight into the app in that language. */
