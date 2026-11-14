@@ -1,0 +1,11 @@
+{
+ "k99500": "EC<small>dS/m · ECe · target &lt; {0}</small>",
+ "k99501": "EC<small>mS/cm · ECe · target &lt; {0}</small>",
+ "k99502": "EC<small>mS/cm · {0}:{1} · target &lt; {2}</small>",
+ "k99503": "EC<small>mmhos/cm · ECe · target &lt; {0}</small>",
+ "k99504": "EC<small>mmhos/cm · {0}:{1} · target &lt; {2}</small>",
+ "k99505": "EC<small>ppm ({0}) · ECe · target &lt; {1}</small>",
+ "k99506": "EC<small>ppm ({0}) · {1}:{2} · target &lt; {3}</small>",
+ "k99507": "EC<small>µS/cm · ECe · target &lt; {0}</small>",
+ "k99508": "EC<small>µS/cm · {0}:{1} · target &lt; {2}</small>"
+}
