@@ -11,7 +11,7 @@ The app is available in **English, 简体中文, 繁體中文 and Bahasa Melayu*
 | Overview | Profile, career timeline (1998–2026) and credits for Dr. Huang, co-authors, writers and organizations |
 | Core principles | 13 principles from his papers and interviews (fertilize by the soil, disease triangle, microbes as the "second seed", pH as the fastest lever, and more) |
 | Field evidence | Trial charts: melon, bitter gourd, nematodes, root rot, salt remediation, rice rotation; an organic farm case study |
-| Soil test checker | Enter a lab report (EC, pH, OM, P, K, Ca, Mg) and get a prioritized prescription, including his EC-based base-fertilizer rule |
+| Soil test checker | Enter a lab report (EC, pH, OM, P, K, Ca, Mg) and get a prioritized prescription, including Dr. Huang's EC-based base-fertilizer rule; plus salt tolerance by crop for common vegetables and fruit (FAO data, converted to EC 1:5 by soil texture; not Dr. Huang's work) |
 | Symptom guide | 14 nutrient disorders and root problems: what they look like, causes, and fixes with doses |
 | Recovery playbook | Nine steps from diagnosis to monitoring |
 | Liquid fertilizer | His fermented High-N / High-P / High-K recipes, a drum-size calculator, and a recipe builder for swapping or leaving out ingredients |
