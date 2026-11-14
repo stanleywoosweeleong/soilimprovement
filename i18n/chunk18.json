@@ -1,0 +1,7 @@
+{
+ "k98000": "Wait until the salt is down: apply phosphate (with PSB) only after a retest shows EC at {0} or lower. Fix pH first, because acidic soil locks up P.",
+ "k98001": "Wait until the salt is down: once a retest shows EC at {0} or lower, apply K in split doses by growth stage, especially during fruit fill.",
+ "k98002": "Dolomite or GML if pH is low. Gypsum adds salt, so wait until a retest shows EC at {0} or lower. Avoid too much ammonium nitrogen, which blocks Ca uptake.",
+ "k98003": "Use dolomite or GML if the soil is acidic. Magnesium sulfate adds salt, so wait until a retest shows EC at {0} or lower. Check K is not in excess.",
+ "k98004": "Not sure: exact limit unknown"
+}
